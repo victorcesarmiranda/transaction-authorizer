@@ -2,16 +2,15 @@ package br.com.victorcesarmiranda.transactionauthorizer.service.payment.strategy
 
 import java.math.BigDecimal;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.victorcesarmiranda.transactionauthorizer.enums.PaymentMethodByMcc;
 import br.com.victorcesarmiranda.transactionauthorizer.model.Account;
 import br.com.victorcesarmiranda.transactionauthorizer.service.account.AccountSevice;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Component
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class FoodPayment implements PaymentStrategy {
 
     private final AccountSevice accountSevice;

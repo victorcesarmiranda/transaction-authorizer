@@ -3,7 +3,8 @@ package br.com.victorcesarmiranda.transactionauthorizer.model;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import br.com.victorcesarmiranda.transactionauthorizer.dto.TransactionRequestDto;
+import br.com.victorcesarmiranda.transactionauthorizer.dto.TransactionDto;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,10 +29,14 @@ public class Transaction {
     @ManyToOne
     private Account account;
     private BigDecimal amount;
+
+    @Column(length = 40)
     private String merchant;
+
+    @Column(length = 4)
     private String mcc;
 
-    public Transaction(Account account, TransactionRequestDto dto) {
+    public Transaction(Account account, TransactionDto dto) {
         this.account = account;
         this.amount = dto.totalAmount();
         this.merchant = dto.merchant();

@@ -1,6 +1,5 @@
 package br.com.victorcesarmiranda.transactionauthorizer.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,21 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.victorcesarmiranda.transactionauthorizer.dto.ResponseDto;
-import br.com.victorcesarmiranda.transactionauthorizer.dto.TransactionRequestDto;
+import br.com.victorcesarmiranda.transactionauthorizer.dto.TransactionDto;
+import br.com.victorcesarmiranda.transactionauthorizer.enums.TransactionResult;
 import br.com.victorcesarmiranda.transactionauthorizer.service.transaction.TransactionService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/transaction")
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class TransactionController {
 
-    private TransactionService service;
+    private final TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<ResponseDto> processTransaction(@RequestBody @Valid TransactionRequestDto dto) {
-        service.processTransaction(dto);
-        return ResponseEntity.ok(new ResponseDto("00"));
+    public ResponseEntity<ResponseDto> processTransaction(@RequestBody @Valid TransactionDto dto) {
+        transactionService.processTransaction(dto);
+        return ResponseEntity.ok(new ResponseDto(TransactionResult.APPROVED.getCode()));
     }
 }

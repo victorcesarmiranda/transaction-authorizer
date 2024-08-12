@@ -1,24 +1,24 @@
 package br.com.victorcesarmiranda.transactionauthorizer.service.account;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.victorcesarmiranda.transactionauthorizer.exception.InsufficientBalanceException;
 import br.com.victorcesarmiranda.transactionauthorizer.model.Account;
 import br.com.victorcesarmiranda.transactionauthorizer.repository.AccountRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class AccountSevice {
 
     private final AccountRepository accountRepository;
 
     public Account findByNumber(String number) {
         return accountRepository.findByNumber(number)
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("Account not found"));
     }
 
     public void debitFromFood(Account account, BigDecimal amount) {

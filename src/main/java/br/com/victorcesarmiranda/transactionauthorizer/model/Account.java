@@ -32,15 +32,15 @@ public class Account {
     private List<Transaction> transactions;
 
     public boolean canDebitFromFood(BigDecimal amount) {
-        return foodBalance.compareTo(amount) >= 0;
+        return this.foodBalance.compareTo(amount) >= 0;
     }
 
     public boolean canDebitFromMeal(BigDecimal amount) {
-        return mealBalance.compareTo(amount) >= 0;
+        return this.mealBalance.compareTo(amount) >= 0;
     }
 
     public boolean canDebitFromCash(BigDecimal amount) {
-        return cashBalance.compareTo(amount) >= 0;
+        return this.cashBalance.compareTo(amount) >= 0;
     }
 
     public void debitFromFood(BigDecimal amount) {

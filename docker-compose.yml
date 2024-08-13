@@ -1,0 +1,26 @@
+# spring-boot-docker/docker-compose.yml
+version: "3.9"
+services:
+  postgres-server:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    networks:
+      - transaction-authorizer-network
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: transaction
+  transaction-authorizer-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - transaction-authorizer-network
+    depends_on:
+      - postgres-server
+networks:
+  transaction-authorizer-network:
+    driver: bridge

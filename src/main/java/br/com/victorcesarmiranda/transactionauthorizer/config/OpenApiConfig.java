@@ -11,7 +11,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
-public class OpenAPIConfig {
+public class OpenApiConfig {
 
   @Bean
   public OpenAPI transactionAthorizerApi() {

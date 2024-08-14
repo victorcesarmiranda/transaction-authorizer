@@ -18,6 +18,7 @@ import br.com.victorcesarmiranda.transactionauthorizer.model.Account;
 import br.com.victorcesarmiranda.transactionauthorizer.model.Transaction;
 import br.com.victorcesarmiranda.transactionauthorizer.repository.TransactionRepository;
 import br.com.victorcesarmiranda.transactionauthorizer.service.account.AccountSevice;
+import br.com.victorcesarmiranda.transactionauthorizer.service.merchant.MerchantService;
 import br.com.victorcesarmiranda.transactionauthorizer.service.payment.PaymentExecutor;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,6 +33,9 @@ class TransactionServiceTest {
     @Mock
     private PaymentExecutor paymentExecutor;
 
+    @Mock
+    private MerchantService merchantService;
+
     @InjectMocks
     private TransactionService transactionService;
 
@@ -41,6 +45,7 @@ class TransactionServiceTest {
         Account account = new Account();
         account.setNumber("12345");
         BDDMockito.given(accountService.findByNumber(transactionDto.account())).willReturn(account);
+        BDDMockito.given(merchantService.getPaymentMethodByMerchant(transactionDto.merchant())).willReturn("MEAL");
 
         transactionService.processTransaction(transactionDto);
 
@@ -54,6 +59,7 @@ class TransactionServiceTest {
         Account account = new Account();
         account.setNumber("12345");
         BDDMockito.given(accountService.findByNumber(transactionDto.account())).willReturn(account);
+        BDDMockito.given(merchantService.getPaymentMethodByMerchant(transactionDto.merchant())).willReturn("");
 
         transactionService.processTransaction(transactionDto);
 

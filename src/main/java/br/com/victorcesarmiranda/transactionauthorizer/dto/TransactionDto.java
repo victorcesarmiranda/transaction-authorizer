@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public record TransactionDto(@NotBlank String account,
                              @NotNull BigDecimal totalAmount,
-                             @NotBlank String mcc,
-                             @NotBlank String merchant) {
+                             @Pattern(regexp = "\\d{4}") String mcc,
+                             @NotBlank @Size(max = 40) String merchant) {
 }

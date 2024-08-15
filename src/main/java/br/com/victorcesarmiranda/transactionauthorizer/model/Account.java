@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,9 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
+
+    @Version
+    private Long version;
 
     public boolean canDebitFromFood(BigDecimal amount) {
         return this.foodBalance.compareTo(amount) >= 0;

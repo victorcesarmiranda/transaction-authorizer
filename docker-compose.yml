@@ -18,7 +18,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-     OPENAI_API_KEY: ${OPENAI_API_KEY}
+     OPENAI_API_KEY: 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
     networks:
       - transaction-authorizer-network
     depends_on:
